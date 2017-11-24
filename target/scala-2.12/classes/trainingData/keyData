@@ -1,0 +1,13 @@
+package generativeHarmoniser.src.main.scala.trainingData
+
+import scala.io.{BufferedSource, Source}
+
+object keyData {
+
+  def file(filename:String): BufferedSource = Source.fromFile(filename)
+  def lines(bufferedSource: BufferedSource) = bufferedSource.toString().split('\n')
+  def perLine(arr: Array[String]) = arr.map(line => line.split('\t'))
+  def keyChanges(perLine:Array[Array[String]]) = perLine.map(line => (line.apply(0).toFloat,line.apply(2)))
+
+  def keys(filename:String) = keyChanges(perLine(lines(file(filename))))
+}

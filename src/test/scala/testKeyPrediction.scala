@@ -4,7 +4,6 @@ import generativeHarmoniser.src.main.scala.keyPrediction._
 import org.scalatest.FunSuite
 
 
-
 class testKeyPrediction extends FunSuite {
 
   test("test normalise notes") {

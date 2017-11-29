@@ -14,12 +14,11 @@ object midiFileReader {
     tracks.flatMap(x => processTrack(x))
   }
 
-  def midiLength(filename: String):(Long,Float,Int) = {
+  def ticklength(filename: String):Long = {
     val seq = getSeq(filename)
     val ticks = seq.getTickLength
-    val resolution = seq.getResolution
-    val divType = seq.getDivisionType
-    (ticks,divType, resolution)
+    val microsecs = seq.getMicrosecondLength
+    ticks./(microsecs).*(1000)
   }
 
   def processTrack(track: Track): Set[(MidiMessage,Long)] = {

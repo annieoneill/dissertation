@@ -8,11 +8,11 @@ class testHMM extends FunSuite {
   test("test finding notes on") {
     def data:Array[(Boolean,Int,Double)] = Array((true,1,10),(true,2,10),(false,2, 20))
 
-    def map = getVector(20,data)
+    def map  = getVector(20,data)
 
-    assert(map.get(2)== 0)
-    assert(map.get(1) == 1)
-    assert(map.get(12) == 0)
+    assert(map.get(2).get == 0)
+    assert(map.get(1).get == 1)
+    assert(map.get(12).get == 0)
   }
 
 }

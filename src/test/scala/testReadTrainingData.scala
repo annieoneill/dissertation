@@ -18,4 +18,10 @@ class testReadTrainingData extends FunSuite {
     assert(key.apply(2) == (129.94.toFloat,"Silence"))
     assert(key.length == 3)
   }
+  test("enharmonic equivelants"){
+    val chord = "Bb:maj7"
+    val sharp = enharmonicEquivelent(chord)
+    assert(sharp == "A#:maj7")
+
+  }
 }

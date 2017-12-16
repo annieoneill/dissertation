@@ -14,20 +14,22 @@ object midiFileReader {
     tracks.flatMap(x => processTrack(x))
   }
 
+  //length of a tick in seconds
   def ticklength(filename: String):Long = {
     val seq = getSeq(filename)
     val ticks = seq.getTickLength
     val microsecs = seq.getMicrosecondLength
-    ticks./(microsecs).*(1000)
+    ticks.*(1000000)./(microsecs)
   }
 
   def processTrack(track: Track): Set[(MidiMessage,Long)] = {
     var midievents = Set.empty[(MidiMessage,Long)]
-    for (i <- 0 to track.size()-1) {
+    for (i <- 0 until track.size()) {
       val message = track.get(i).getMessage
-      midievents = message.toString.contains("FastShortMessage") match {
-        case true => midievents.+((message, track.get(i).getTick))
-        case false => midievents
+      midievents = if (message.toString.contains("FastShortMessage")) {
+        midievents.+((message, track.get(i).getTick))
+      } else {
+        midievents
       }
     }
     midievents

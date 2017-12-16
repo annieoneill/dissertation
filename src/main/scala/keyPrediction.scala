@@ -4,22 +4,21 @@ import javax.sound.midi.{MidiMessage, ShortMessage}
 
 object keyPrediction {
 
-  def normalisedNote(message:MidiMessage, tick:Double) = {
+  def normalisedNote(message:MidiMessage, tick:Double): Option[(Boolean, Int, Double)] = {
 
     val sm: ShortMessage = message.asInstanceOf[ShortMessage]
-    val noteOn:Boolean = (sm.getCommand == 0x90 && sm.getData2 != 0)
     val note = sm.getData1
-    val velocity = sm.getData2
-    val ret = sm.getCommand.<(0xA0) match {
-      case true => Some(sm.getData2!=0, note, tick)
-      case false => None
+    val ret = if (sm.getCommand.<(0xA0)) {
+      Some(sm.getData2 != 0, note, tick)
+    } else {
+      None
     }
     ret
   }
 
   def wholePieceVector(notes:Array[(Boolean,Int,Double)]): Map[Int, Double] = {
 
-    // notes = noteon?,note,tick
+    // notes = noteOn?,note,tick
     val on = notes.filter(x => x._1)
     val off = notes.filter(x => !x._1)
 

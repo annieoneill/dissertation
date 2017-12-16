@@ -1,0 +1,5 @@
+package HMM
+
+object Trainer {
+
+}

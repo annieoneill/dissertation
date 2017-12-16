@@ -11,14 +11,14 @@ import generativeHarmoniser.src.main.scala.keyPrediction._
 class testMidiFileReader extends FunSuite {
 
 
-  def data = dataFromTracks("src/test/resources/The_Beatles_-_I_Saw_Her_Standing_There.mid")
-  def seq = MidiSystem.getSequence(new File("src/test/resources/The_Beatles_-_I_Saw_Her_Standing_There.mid"))
-  def normalisedData = data.map(x => normalisedNote(x._1,x._2.toDouble)).filter(o => o.getOrElse(1,1,1)._2 == 76).map(o => o.get)
+  def data: Array[(MidiMessage, Long)] = dataFromTracks("src/test/resources/The_Beatles_-_I_Saw_Her_Standing_There.mid")
+  def seq: Sequence = MidiSystem.getSequence(new File("src/test/resources/The_Beatles_-_I_Saw_Her_Standing_There.mid"))
+  def normalisedData: Array[(Boolean, Int, Double)] = data.map(x => normalisedNote(x._1,x._2.toDouble)).filter(o => o.getOrElse(1,1,1)._2 == 76).map(o => o.get)
 
   test("testing reading midi files") {
 
-    def offs = normalisedData.filter(x => x._3 == 0).length
-    def ons = normalisedData.filter(x => x._3 != 0).length
+    def offs = normalisedData.count(x => x._3 == 0)
+    def ons = normalisedData.count(x => x._3 != 0)
 
     assert(offs == ons)
     assert(offs != 0)
@@ -27,11 +27,11 @@ class testMidiFileReader extends FunSuite {
   test("testing data read from file is as it should be") {
 
     def file = new File("src/test/resources/outputMidi.mid")
-    var newSeq = new Sequence(javax.sound.midi.Sequence.PPQ,24)
-    var track = newSeq.createTrack()
-    var sm1 = new ShortMessage()
-    var sm2 = new ShortMessage()
-    var mm1 = new MetaMessage()
+    val newSeq = new Sequence(javax.sound.midi.Sequence.PPQ,24)
+    val track = newSeq.createTrack()
+    val sm1 = new ShortMessage()
+    val sm2 = new ShortMessage()
+    val mm1 = new MetaMessage()
     sm1.setMessage(0x90,1,1,1)
     sm2.setMessage(0x90,2,2,2)
     mm1.setMessage(0x2F,Array.emptyByteArray,0)
@@ -65,11 +65,8 @@ class testMidiFileReader extends FunSuite {
   }
 
   test("test midi file length is same right") {
-    def lengths = midiLength("src/test/resources/The_Beatles_-_I_Saw_Her_Standing_There.mid")
-
-    assert(lengths._1 == 55199)
-    assert(lengths._2 == Sequence.PPQ)
-    assert(lengths._3 == 120)
+    def lengths = ticklength("src/test/resources/The_Beatles_-_I_Saw_Her_Standing_There.mid")
+    assert(lengths == 320)
   }
 
 }

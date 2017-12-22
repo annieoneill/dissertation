@@ -1,7 +1,7 @@
 package generativeHarmoniser.src.test.scala
 
 import org.scalatest.FunSuite
-import generativeHarmoniser.src.main.scala.negativeHarmony._
+import negative.negativeHarmony._
 
 class testNegativeHarmoniser extends FunSuite {
 

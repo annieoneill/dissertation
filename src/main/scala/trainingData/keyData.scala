@@ -1,4 +1,4 @@
-package generativeHarmoniser.src.main.scala.trainingData
+package trainingData
 
 import scala.io.Source
 

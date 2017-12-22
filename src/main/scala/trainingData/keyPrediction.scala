@@ -1,4 +1,4 @@
-package generativeHarmoniser.src.main.scala
+package trainingData
 
 import javax.sound.midi.{MidiMessage, ShortMessage}
 

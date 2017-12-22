@@ -1,4 +1,4 @@
-package generativeHarmoniser.src.main.scala
+package negative
 
 object negativeHarmony {
 

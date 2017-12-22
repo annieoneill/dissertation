@@ -1,5 +1,0 @@
-package HMM
-
-object ForwardViterbi {
-
-}

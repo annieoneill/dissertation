@@ -1,8 +1,8 @@
-package generativeHarmoniser.src.test.scala
+package testTrainingData
 
 import org.scalatest.FunSuite
-import generativeHarmoniser.src.main.scala.trainingData.chordData._
-import generativeHarmoniser.src.main.scala.trainingData.keyData._
+import trainingData.chordData._
+import trainingData.keyData._
 
 class testReadTrainingData extends FunSuite {
 

@@ -1,11 +1,11 @@
-package generativeHarmoniser.src.test.scala
+package testTrainingData
 
 import java.io.File
 import javax.sound.midi._
 
 import org.scalatest.FunSuite
-import generativeHarmoniser.src.main.scala.midiFileReader._
-import generativeHarmoniser.src.main.scala.keyPrediction._
+import trainingData.keyPrediction._
+import trainingData.midiFileReader._
 
 
 class testMidiFileReader extends FunSuite {

@@ -1,7 +1,0 @@
-package HMM
-
-object Predictor {
-
-
-
-}

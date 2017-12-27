@@ -1,4 +1,4 @@
-package generativeHarmoniser.src.test.scala.testHMM
+package testHMM
 
 import org.scalatest.FunSuite
 import HMM.Model

@@ -3,7 +3,7 @@ package testHMM
 import org.scalatest.FunSuite
 import HMM.Viterbi._
 
-class testViterbi extends FunSuite {
+abstract class testViterbi extends FunSuite {
 
   test("testing get current best") {
     val prev = Array((0.3,0),(0.4,1),(0.5,1))

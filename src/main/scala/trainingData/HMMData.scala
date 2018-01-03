@@ -15,7 +15,7 @@ object HMMData {
     val usefulData = data.filter(x => x._3<time)
     val allNotes = usefulData.map(x => x._2).distinct
     val notesOn = allNotes.map( x => (x,usefulData.count(t => t._2==x).%(2))).filter(x => x._2==1).map(x => x._1)
-    val normalisedNotes = notesOn.map(x => x.%(12))
+    val normalisedNotes = notesOn.map(x => x.%(12)).distinct
     updatedMap(normalisedNotes)
   }
 
